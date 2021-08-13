@@ -9,14 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pawsome.R
 import com.example.pawsome.api.DogImageRetriever
+import com.example.pawsome.application.DogApp
 import com.example.pawsome.data.DogBreed
 import com.example.pawsome.data.DogBreedInfo
 import com.example.pawsome.ui.adapter.DogBreedsAdapter
 import com.example.pawsome.ui.adapter.DogInfoAdapter
+import com.example.pawsome.viewmodel.DogViewModel
+import com.example.pawsome.viewmodel.DogViewModelFactory
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_dog_image_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,6 +38,10 @@ class MainActivity : AppCompatActivity() {
     private var mResultList: List<DogBreed> = emptyList()
     private var mSearchedList :List<DogBreedInfo> = emptyList()
     private val dogRetriever = DogImageRetriever()
+
+    private val dogViewModel : DogViewModel by viewModels {
+        DogViewModelFactory((application as DogApp).repository)
+    }
 
     private val callbackSearch = object:Callback<List<DogBreedInfo>> {
         override fun onFailure(call: Call<List<DogBreedInfo>>, t: Throwable) {
@@ -63,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                 mResultList = response?.body() ?: emptyList()
                 Log.d("mainActivity","$mResultList")
                 val onItemClicked ={position: Int -> onCardItemClick(position)}
-                dogInfoList.adapter = DogInfoAdapter(mResultList,onItemClicked)
+                dogInfoList.adapter = DogInfoAdapter(mResultList,onItemClicked,dogViewModel)
             }
         }
     }

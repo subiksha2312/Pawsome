@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class DogRepository(private val dogDao: DogDao) {
 
-    val allDogs : Flow<List<DogTable>> = dogDao.getAllFavDogs()
+    val allDogs : Flow<List<DogTable>> = dogDao.getAllFavs()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

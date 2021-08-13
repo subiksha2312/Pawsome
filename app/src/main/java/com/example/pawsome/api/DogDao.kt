@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DogDao {
     @Query ("SELECT * FROM dog_table ORDER BY name ASC")
-    fun getAllFavDogs() : Flow<List<DogTable>>
+    fun getAllFavs() : Flow<List<DogTable>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(dogTable : DogTable)

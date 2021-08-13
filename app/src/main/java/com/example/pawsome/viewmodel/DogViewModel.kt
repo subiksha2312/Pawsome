@@ -3,11 +3,13 @@ package com.example.pawsome.viewmodel
 import androidx.lifecycle.*
 import com.example.pawsome.data.DogRepository
 import com.example.pawsome.data.DogTable
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class DogViewModel(private val repository : DogRepository) : ViewModel() {
 
-    val allDogs : LiveData<List<DogTable>> = repository.allDogs.asLiveData()
+    val allDogs: LiveData<List<DogTable>> = repository.allDogs.asLiveData()
+
 
     fun insert(dogTable : DogTable) = viewModelScope.launch {
         repository.insert(dogTable)
@@ -18,7 +20,7 @@ class DogViewModel(private val repository : DogRepository) : ViewModel() {
     }
 }
 
-class WordViewModelFactory(private val repository : DogRepository) : ViewModelProvider.Factory {
+class DogViewModelFactory(private val repository : DogRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DogViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

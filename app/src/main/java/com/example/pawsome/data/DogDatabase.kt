@@ -1,6 +1,7 @@
 package com.example.pawsome.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -18,6 +19,7 @@ public abstract class DogDatabase : RoomDatabase() {
         private var INSTANCE: DogDatabase? = null
 
         fun getDatabase(context: Context) : DogDatabase {
+            Log.d("database1","creating database")
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

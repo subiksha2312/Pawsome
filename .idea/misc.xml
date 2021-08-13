@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/suresh k/AndroidStudioProjects/Pawsome/app/src/main/res/drawable/ic_round_favorite_border_24.xml" value="0.1287037037037037" />
         <entry key="..\:/Users/suresh k/AndroidStudioProjects/Pawsome/app/src/main/res/layout/activity_dog_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/suresh k/AndroidStudioProjects/Pawsome/app/src/main/res/layout/activity_dog_image_detail.xml" value="0.176" />
         <entry key="..\:/Users/suresh k/AndroidStudioProjects/Pawsome/app/src/main/res/layout/activity_favourites_section.xml" value="0.25416666666666665" />
