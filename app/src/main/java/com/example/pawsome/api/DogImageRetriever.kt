@@ -1,10 +1,10 @@
 package com.example.pawsome.api
 
-import com.example.pawsome.data.DogImage
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.R
+import com.example.pawsome.data.DogBreed
 import com.example.pawsome.data.DogBreedInfo
 
 
@@ -27,7 +27,7 @@ class DogImageRetriever {
         service = retrofit.create(DogAPIService::class.java)
     }
 
-    fun getDogImages(callback: Callback<List<DogImage>>) {
+    fun getDogImages(callback: Callback<List<DogBreed>>) {
         val call = service.retrieveDogImages()
         call.enqueue(callback)
 

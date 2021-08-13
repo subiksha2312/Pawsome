@@ -13,8 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pawsome.R
 import com.example.pawsome.api.DogImageRetriever
+import com.example.pawsome.data.DogBreed
 import com.example.pawsome.data.DogBreedInfo
-import com.example.pawsome.data.DogImage
 import com.example.pawsome.ui.adapter.DogBreedsAdapter
 import com.example.pawsome.ui.adapter.DogInfoAdapter
 import com.squareup.picasso.Picasso
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var uploadButton:ImageButton
     private lateinit var searchView: EditText
     private lateinit var searchButton: ImageButton
-    private var mResultList: List<DogImage> = emptyList()
+    private var mResultList: List<DogBreed> = emptyList()
     private var mSearchedList :List<DogBreedInfo> = emptyList()
     private val dogRetriever = DogImageRetriever()
 
@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val callback = object: Callback<List<DogImage>> {
-        override fun onFailure(call: Call<List<DogImage>>, t: Throwable) {
+    private val callback = object: Callback<List<DogBreed>> {
+        override fun onFailure(call: Call<List<DogBreed>>, t: Throwable) {
             Log.e("MainActivity","${t.message}")
         }
 
-        override fun onResponse(call: Call<List<DogImage>>, response: Response<List<DogImage>>) {
+        override fun onResponse(call: Call<List<DogBreed>>, response: Response<List<DogBreed>>) {
             response?.isSuccessful.let {
                 mResultList = response?.body() ?: emptyList()
                 Log.d("mainActivity","$mResultList")
@@ -125,15 +125,15 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onCardItemClick(position: Int) {
-        if(mResultList[position].breeds.isNotEmpty()) {
+        if(mResultList[position].name.isNotEmpty()) {
             val intent= Intent(this,DogImageDetail::class.java)
-            intent.putExtra("dogName", mResultList[position].breeds[0].name)
-            intent.putExtra("temperament","${mResultList[position].breeds[0].temperament}")
-            intent.putExtra("breedFor","${mResultList[position].breeds[0].bred_for}")
-            intent.putExtra("dHeight","${mResultList[position].breeds[0].height}")
-            intent.putExtra("dWeight","${mResultList[position].breeds[0].weight}")
-            intent.putExtra("lifespan","${mResultList[position].breeds[0].life_span}")
-            intent.putExtra("dogPhoto","${mResultList[position].url}")
+            intent.putExtra("dogName", mResultList[position].name)
+            intent.putExtra("temperament","${mResultList[position].temperament}")
+            intent.putExtra("breedFor","${mResultList[position].bredFor}")
+            intent.putExtra("dHeight","${mResultList[position].height}")
+            intent.putExtra("dWeight","${mResultList[position].weight}")
+            intent.putExtra("lifespan","${mResultList[position].lifeSpan}")
+            intent.putExtra("dogPhoto","${mResultList[position].image.url}")
             startActivity(intent)
            //Toast.makeText(this,mResultList[position].breeds[0].name,Toast.LENGTH_SHORT).show()
         }

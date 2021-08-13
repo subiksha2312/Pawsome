@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pawsome.R
 import com.example.pawsome.data.DogBreedInfo
-import com.example.pawsome.data.DogImage
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dog_info.view.*
 
 
@@ -28,7 +26,7 @@ class DogBreedsAdapter(private val dogBreedInfoList: List<DogBreedInfo>)
 
     class BreedViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
-        fun bindBreedInfo(dogBreedInfo: DogBreedInfo,itemCount: Int) {
+        fun bindBreedInfo(dogBreedInfo: DogBreedInfo, itemCount: Int) {
 
             if (itemCount > 0) {
                 itemView.dogName.text = dogBreedInfo.name ?: "Not Available"

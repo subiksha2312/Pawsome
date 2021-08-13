@@ -1,8 +1,7 @@
 package com.example.pawsome.api
 
+import com.example.pawsome.data.DogBreed
 import com.example.pawsome.data.DogBreedInfo
-import com.example.pawsome.data.DogImage
-import com.example.pawsome.data.deleteDogFaves
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -13,12 +12,12 @@ interface DogAPIService {
 
     @Headers("x-api-key:3d739c2f-28ed-40c5-8d67-e64b23642dd7")
     @GET("/v1/breeds")
-    fun retrieveDogImages() : Call<List<DogImage>>
+    fun retrieveDogImages() : Call<List<DogBreed>>
 
     @Headers("x-api-key:3d739c2f-28ed-40c5-8d67-e64b23642dd7")
     @GET("/v1/breeds/search")
     fun searchDogBreeds(@Query("q")breedName: String) : Call<List<DogBreedInfo>>
-
+/*
     @Headers("x-api-key:3d739c2f-28ed-40c5-8d67-e64b23642dd7")
     @POST("/v1/favourites")
     fun getFaves()
@@ -28,6 +27,8 @@ interface DogAPIService {
     fun deleteFaves(@Query("favourite_id")id: Int) : Call<deleteDogFaves>
 
 
+
+ */
 
 
 

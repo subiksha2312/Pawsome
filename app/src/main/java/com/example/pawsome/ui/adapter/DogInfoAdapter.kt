@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pawsome.R
-import com.example.pawsome.data.DogImage
+import com.example.pawsome.data.DogBreed
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dog_info.view.*
 
 
-class DogInfoAdapter(private val dogInfoList: List<DogImage>,
+class DogInfoAdapter(private val dogInfoList: List<DogBreed>,
                      private val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<DogInfoAdapter.ViewHolder> () {
 
 
@@ -34,18 +34,18 @@ class DogInfoAdapter(private val dogInfoList: List<DogImage>,
             itemView.setOnClickListener(this)
         }
 
-        fun bindDogInfo(dogInfo: DogImage) {
+        fun bindDogInfo(dogInfo: DogBreed) {
 
-            if (dogInfo.breeds.isNotEmpty()) {
-                itemView.dogName.text = dogInfo.breeds[0].name ?: "Not Available"
-                itemView.temperament.text = dogInfo.breeds[0].temperament ?: "Not Available"
-                itemView.lifespan.text = dogInfo.breeds[0].life_span ?: "Not Available"
-                itemView.breedFor.text = dogInfo.breeds[0].weight.metric ?: "Not Available"
-                itemView.dHeight.text = dogInfo.breeds[0].height.metric ?: "Not Available"
-                Picasso.get().load(dogInfo.url).into(itemView.dogImage)
+            if (dogInfo.name.isNotEmpty()) {
+                itemView.dogName.text = dogInfo.name ?: "Not Available"
+                itemView.temperament.text = dogInfo.temperament ?: "Not Available"
+                itemView.lifespan.text = dogInfo.lifeSpan ?: "Not Available"
+                itemView.breedFor.text = dogInfo.weight.metric ?: "Not Available"
+                itemView.dHeight.text = dogInfo.height.metric ?: "Not Available"
+                Picasso.get().load(dogInfo.image.url).into(itemView.dogImage)
             } else {
                 itemView.dogName.text = "Breed Info Not Available"
-                Picasso.get().load(dogInfo.url).into(itemView.dogImage)
+                Picasso.get().load(dogInfo.image.url).into(itemView.dogImage)
             }
 
 

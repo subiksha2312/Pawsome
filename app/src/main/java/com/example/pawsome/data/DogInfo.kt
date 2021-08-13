@@ -17,6 +17,8 @@ data class DogBreedInfo(
 )
 
 
+
+
 data class DogWeight(
     @SerializedName("imperial") val imperial : String,
     @SerializedName("metric") val metric : String
@@ -28,7 +30,7 @@ data class DogHeight(
     @SerializedName("metric") val metric : String
 )
 
-
+/*
 data class DogImage(
     @SerializedName("breeds") val breeds : List<DogBreedInfo>,
     @SerializedName("id") val id : String,
@@ -46,6 +48,27 @@ data class deleteDogFaves(
     @SerializedName("message") val message : String
 )
 
+ */
 
+data class ImageData (
+    val id: String,
+    val width: Long,
+    val height: Long,
+    val url: String
+)
+
+data class DogBreed (
+    val weight: DogWeight,
+    val height: DogHeight,
+    val id: Long,
+    val name: String,
+    val bredFor: String,
+    val breedGroup: String,
+    val lifeSpan: String,
+    val temperament: String,
+    val origin: String,
+    val referenceImageID: String,
+    val image: ImageData
+)
 
 
