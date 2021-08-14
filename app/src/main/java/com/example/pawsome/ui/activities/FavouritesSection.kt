@@ -1,8 +1,11 @@
 package com.example.pawsome.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,11 +23,9 @@ import kotlinx.android.synthetic.main.activity_main.dogInfoList
 class FavouritesSection : AppCompatActivity() {
 
 
-
     private val dogViewModel : DogViewModel by viewModels {
         DogViewModelFactory((application as DogApp).repository)
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,14 @@ class FavouritesSection : AppCompatActivity() {
 
         val recyclerView =findViewById(R.id.dogFaveList) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+       /* val dogImageFave = findViewById<ImageView>(R.id.dogImage)
+        dogImageFave.setOnClickListener() {
+            val intent: Intent = Intent(this, DogImageDetail::class.java)
+            startActivity(intent)
+        }
+
+        */
 
         dogViewModel.allDogs.observe(this) {
             dogs ->
@@ -43,5 +52,9 @@ class FavouritesSection : AppCompatActivity() {
         }
 
      }
+
+
+
+
 }
 

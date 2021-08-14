@@ -2,11 +2,14 @@ package com.example.pawsome.ui.activities
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.widget.*
 import androidx.activity.viewModels
@@ -21,6 +24,7 @@ import com.example.pawsome.ui.adapter.DogBreedsAdapter
 import com.example.pawsome.ui.adapter.DogInfoAdapter
 import com.example.pawsome.viewmodel.DogViewModel
 import com.example.pawsome.viewmodel.DogViewModelFactory
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_dog_image_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,6 +32,15 @@ import kotlinx.android.synthetic.main.dog_info.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.provider.MediaStore
+
+import android.graphics.BitmapFactory
+import android.net.Uri
+import kotlinx.android.synthetic.main.activity_dog_image_detail.dogImage
+import kotlinx.android.synthetic.main.activity_favourites_section.*
+import kotlinx.android.synthetic.main.dog_info.*
+import java.io.ByteArrayOutputStream
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 mResultList = response?.body() ?: emptyList()
                 Log.d("mainActivity","$mResultList")
                 val onItemClicked ={position: Int -> onCardItemClick(position)}
-                dogInfoList.adapter = DogInfoAdapter(mResultList,onItemClicked,dogViewModel)
+                dogInfoList.adapter = DogInfoAdapter(mResultList,onItemClicked,dogViewModel,this@MainActivity)
             }
         }
     }
@@ -80,7 +93,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val builder: StrictMode.VmPolicy.Builder =StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
+
+        val policy : StrictMode.ThreadPolicy  =  StrictMode.ThreadPolicy.Builder().permitAll().build();
+       StrictMode.setThreadPolicy(policy)
+
         setContentView(R.layout.activity_main)
+
+
 
         dogInfoList.layoutManager = LinearLayoutManager(this)
 
@@ -107,6 +129,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(uploadintent)
         }
 
+
+
         searchView=findViewById(R.id.search)
         searchButton=findViewById(R.id.searchButton)
 
@@ -129,6 +153,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 
 

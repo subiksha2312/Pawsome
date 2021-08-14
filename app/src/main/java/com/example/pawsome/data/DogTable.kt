@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "dog_table")
+@Entity(tableName = "dog_table_image")
 data class DogTable (
     @PrimaryKey @ColumnInfo(name = "id") val id: Long,
     @ColumnInfo(name = "name") val name : String,
@@ -13,5 +13,6 @@ data class DogTable (
     @ColumnInfo(name = "breed_group") val breedGroup : String,
     @ColumnInfo(name = "bred_for") val bredFor : String,
     @ColumnInfo(name = "life_span") val lifeSpan : String,
-    @ColumnInfo(name = "temperament") val temperament : String
+    @ColumnInfo(name = "temperament") val temperament : String,
+    @ColumnInfo(name = "image") val image :String
 )
