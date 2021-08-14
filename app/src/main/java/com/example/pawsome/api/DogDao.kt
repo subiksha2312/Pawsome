@@ -16,5 +16,5 @@ interface DogDao {
     suspend fun insert(dogTable : DogTable)
 
     @Query("DELETE FROM dog_table_image WHERE id = :id")
-    suspend fun delete(id : Int)
+    suspend fun delete(id : Long)
 }

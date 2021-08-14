@@ -13,6 +13,7 @@
         android:layout_height="250dp"
         app:cardCornerRadius="18dp"
         app:cardElevation="1dp"
+        android:id="@+id/dogCardView"
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardMaxElevation="12dp"

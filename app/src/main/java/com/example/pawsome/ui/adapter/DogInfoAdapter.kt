@@ -1,6 +1,7 @@
 package com.example.pawsome.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,9 +10,7 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -44,10 +43,11 @@ import androidx.core.content.ContextCompat.startActivity
 
 
 
-class DogFaveAdapter (private val dogFaves: List<DogTable>) : RecyclerView.Adapter<DogFaveAdapter.ViewHolder> () {
+class DogFaveAdapter (private val dogFaves: List<DogTable>,
+                      private val dogViewModel: DogViewModel) : RecyclerView.Adapter<DogFaveAdapter.ViewHolder> () {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogFaveAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.dog_info, parent, false)
-        return DogFaveAdapter.ViewHolder(view)
+        return DogFaveAdapter.ViewHolder(view, dogFaves, dogViewModel)
 
     }
 
@@ -58,7 +58,19 @@ class DogFaveAdapter (private val dogFaves: List<DogTable>) : RecyclerView.Adapt
 
     override fun getItemCount(): Int = dogFaves.size
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+    @SuppressLint("ClickableViewAccessibility")
+    class ViewHolder(val view: View, private val dogFaves: List<DogTable>, private val dogViewModel: DogViewModel) :
+        RecyclerView.ViewHolder(view) {
+
+        private lateinit var dogCardView: CardView
+        lateinit var gstDetector: GestureDetector
+        var x1: Float = 0f
+        var x2: Float = 0f
+        var y1: Float = 0f
+        var y2: Float = 0f
+        var currAdapterPosition = 0
+
 
         val faveGone = view.findViewById<FloatingActionButton>(R.id.favetouch)
         val shareGone = view.findViewById<FloatingActionButton>(R.id.shareintent)
@@ -66,14 +78,19 @@ class DogFaveAdapter (private val dogFaves: List<DogTable>) : RecyclerView.Adapt
         init {
             faveGone.visibility = View.INVISIBLE
             shareGone.visibility = View.INVISIBLE
+            var gstDetector = GestureDetector(itemView.context, GestureListener())
+            itemView.setOnTouchListener {
+                v,event ->
+                gstDetector.onTouchEvent(event)
+                true
+            }
         }
 
         fun bindFaveInfo(dogFave: DogTable) {
-
             if (dogFave.name.isNotEmpty()) {
                 val bitmapString = ImageBitmapString()
                 val bitmap: Bitmap? = bitmapString.StringToBitMap(dogFave.image)
-             /*
+                /*
                 val fileName: String = "image$adapterPosition.png"
                 val dir: String = Environment.getExternalStorageDirectory().getAbsolutePath()
                 Log.d("convert1","$dir")
@@ -94,23 +111,65 @@ class DogFaveAdapter (private val dogFaves: List<DogTable>) : RecyclerView.Adapt
                 itemView.lifespan.text = dogFave.lifeSpan ?: "Not Available"
                 itemView.breedFor.text = dogFave.dogWeight ?: "Not Available"
                 itemView.dHeight.text = dogFave.dogHeight ?: "Not Available"
-                if( bitmap != null) {
+                if (bitmap != null) {
                     itemView.dogImage.setImageBitmap(bitmap)
                 }
                 //Picasso.get().load(uri).into(itemView.dogImage)
-              //  Picasso.get().load(dogFave.image.url).into(itemView.dogImage)
+                //  Picasso.get().load(dogFave.image.url).into(itemView.dogImage)
             } else {
                 itemView.dogName.text = "Breed Info Not Available"
-              //  Picasso.get().load(dogInfo.image.url).into(itemView.dogImage)
+                //  Picasso.get().load(dogInfo.image.url).into(itemView.dogImage)
             }
 
 
         }
 
+        fun deleteFavDog(position: Int) {
+            var id:Long = dogFaves[position].id
+            dogViewModel.deleteDog(id)
+        }
+
+        inner class GestureListener: GestureDetector.SimpleOnGestureListener() {
+            private var x1 =0f
+            private var x2 = 0f
+            private var y1 = 0f
+            private var y2 =  0f
+            private val SWIPE_THRESHOLD = 100
 
 
 
+
+            override fun onDown(e: MotionEvent?): Boolean {
+                return true
+            }
+
+            override fun onFling(
+                e1: MotionEvent,
+                e2: MotionEvent,
+                velocityX: Float,
+                velocityY: Float
+            ): Boolean {
+                var result = false
+                try {
+                    val diffY = e2.y- e1.y
+                    val diffX = e2.x - e1.x
+
+                    if(Math.abs(diffX) > SWIPE_THRESHOLD || Math.abs(diffY) > SWIPE_THRESHOLD){
+                        result = true
+                        deleteFavDog(adapterPosition)
+                    }
+
+                } catch (exception: Exception) {
+                    exception.printStackTrace()
+                }
+                return result
+            }
+
+        }
     }
+
+
+
 
 
 }

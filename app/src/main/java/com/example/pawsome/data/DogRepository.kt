@@ -16,7 +16,7 @@ class DogRepository(private val dogDao: DogDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun deleteDog(id : Int) {
+    suspend fun deleteDog(id : Long) {
         dogDao.delete(id)
     }
 

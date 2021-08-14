@@ -15,7 +15,7 @@ class DogViewModel(private val repository : DogRepository) : ViewModel() {
         repository.insert(dogTable)
     }
 
-    fun deleteDog(id : Int) = viewModelScope.launch {
+    fun deleteDog(id : Long) = viewModelScope.launch {
         repository.deleteDog(id)
     }
 }
