@@ -71,4 +71,14 @@ data class DogBreed (
     val image: ImageData
 )
 
+data class DogImageUploadResponse (
+    @SerializedName("id") val id : String,
+    @SerializedName("url") val url : String,
+    @SerializedName("width") val width : Int,
+    @SerializedName("height") val height : Int,
+    @SerializedName("original_filename") val original_filename : String,
+    @SerializedName("pending") val pending : Int,
+    @SerializedName("approved") val approved : Int
+
+)
 

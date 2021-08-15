@@ -31,7 +31,7 @@
                     android:id="@+id/dogImage"
                     android:layout_width="600dp"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitStart"
                     android:adjustViewBounds="true"
                     />
 

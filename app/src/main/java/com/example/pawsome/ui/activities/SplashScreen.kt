@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.appcompat.app.ActionBar
 import com.example.pawsome.R
 
 
@@ -13,6 +14,8 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        getActionBar()?.hide();
 
         val backgroundtag:ImageView = findViewById(R.id.logo)
         val slide = AnimationUtils.loadAnimation(this, R.anim.slide)

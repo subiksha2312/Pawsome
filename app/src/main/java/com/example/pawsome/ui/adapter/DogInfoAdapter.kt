@@ -278,6 +278,7 @@ class DogInfoAdapter( private val dogInfoList: List<DogBreed>,
             val imagefolder: File = File(parentActivity.cacheDir, "images")
             var uri: Uri? = null
             val path = MediaStore.Images.Media.insertImage(parentActivity.applicationContext.contentResolver,bitmap,"title",null)
+
             /*
             try {
                 imagefolder.mkdirs()
@@ -287,9 +288,10 @@ class DogInfoAdapter( private val dogInfoList: List<DogBreed>,
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                 outputStream.flush()
                 outputStream.close()
-                uri = FileProvider.getUriForFile(parentActivity.applicationContext, "com.example.pawsome.fileprovider", file)
-                parentActivity.applicationContext.grantUriPermission(packageName,uri,
+                 parentActivity.applicationContext.grantUriPermission(packageName,uri,
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                uri = FileProvider.getUriForFile(parentActivity.applicationContext, "com.example.pawsome.fileprovider", file)
+
             } catch (e: Exception) {
                 Toast.makeText(parentActivity.applicationContext, "" + e.message, Toast.LENGTH_LONG).show()
             }

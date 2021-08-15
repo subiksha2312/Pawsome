@@ -155,19 +155,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
     private fun onCardItemClick(position: Int) {
         if(mResultList[position].name.isNotEmpty()) {
             val intent= Intent(this,DogImageDetail::class.java)
             intent.putExtra("dogName", mResultList[position].name)
             intent.putExtra("temperament","${mResultList[position].temperament}")
-            intent.putExtra("breedFor","${mResultList[position].bredFor}")
             intent.putExtra("dHeight","${mResultList[position].height}")
             intent.putExtra("dWeight","${mResultList[position].weight}")
-            intent.putExtra("lifespan","${mResultList[position].lifeSpan}")
             intent.putExtra("dogPhoto","${mResultList[position].image.url}")
+
             startActivity(intent)
            //Toast.makeText(this,mResultList[position].breeds[0].name,Toast.LENGTH_SHORT).show()
         }
@@ -186,5 +182,9 @@ class MainActivity : AppCompatActivity() {
 
         val networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork)
         return networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
+    override fun onBackPressed() {
+
     }
 }

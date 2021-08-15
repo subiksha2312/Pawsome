@@ -31,16 +31,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
-        android:id="@+id/lifespan"
-        android:layout_width="323dp"
-        android:layout_height="39dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="2dp"
-        android:background="#3F51B5"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-    <TextView
         android:id="@+id/dWeight"
         android:layout_width="345dp"
         android:layout_height="62dp"
@@ -64,17 +54,6 @@
         android:id="@+id/temperament"
         android:layout_width="340dp"
         android:layout_height="73dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dp"
-        android:background="#3F51B5"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-
-    <TextView
-        android:id="@+id/breedFor"
-        android:layout_width="323dp"
-        android:layout_height="53dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="2dp"

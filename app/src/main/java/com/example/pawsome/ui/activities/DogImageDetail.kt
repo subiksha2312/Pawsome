@@ -15,10 +15,8 @@ class DogImageDetail : AppCompatActivity() {
 
         val dName=intent.getStringExtra("dogName")
         val dtemperament=intent.getStringExtra("temperament")
-        val dBreedFor=intent.getStringExtra("breedFor")
         val dHeight=intent.getStringExtra("dHeight")
         val dWeight=intent.getStringExtra("dWeight")
-        val dLifespan=intent.getStringExtra("lifespan")
         val dPhoto=intent.getStringExtra("dogPhoto")
 
         var dogImageA=findViewById<ImageView>(R.id.dogImage)
@@ -30,8 +28,6 @@ class DogImageDetail : AppCompatActivity() {
         var temperamentText=(findViewById(R.id.temperament) as TextView)
         temperamentText.setText(" Temperament: $dtemperament")
 
-        var breedText=(findViewById(R.id.breedFor) as TextView)
-        breedText.setText(" Breed: $dBreedFor")
 
         var heightText=(findViewById(R.id.dHeight) as TextView)
         heightText.setText(" Height: $dHeight")
@@ -39,8 +35,6 @@ class DogImageDetail : AppCompatActivity() {
         var weightText=(findViewById(R.id.dWeight) as TextView)
         weightText.setText(" Weight: $dWeight")
 
-        var lifespanText=(findViewById(R.id.lifespan) as TextView)
-        lifespanText.setText(" Lifespan: $dLifespan")
 
     }
 
